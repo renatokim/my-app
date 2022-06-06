@@ -6,6 +6,7 @@ function App() {
   const [tarefas, setTarefas] = useState([]);
   const [input, setInput] = useState('');
 
+
   useEffect(()=>{
     const tarefasStorage = localStorage.getItem('tarefas');
 
