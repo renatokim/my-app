@@ -1,31 +1,44 @@
-import './App.css';
+import React, { useState, useEffect } from 'react';
 
-const Sobre = (props) => {
-  return (
-    <div>
-      <h2>Sobre: { props.sobre.nome } </h2>
-      <h2>Sobre: { props.sobre.sobrenome } </h2>
-    </div>
-  );
-}
-
-const BemVindo = (props) => {
-  return (
-    <div>
-      <h2>Nome: { props.nome } {props.sobrenome}</h2>
-      <Sobre sobre={props} />
-    </div>
-  );
-}
 
 function App() {
+
+  const [tarefas, setTarefas] = useState([]);
+  const [input, setInput] = useState('');
+
+
+  useEffect(()=>{
+    const tarefasStorage = localStorage.getItem('tarefas');
+
+    if(tarefasStorage){
+      setTarefas(JSON.parse(tarefasStorage));
+    }
+
+  }, []);
+
+
+  useEffect(()=> {
+    localStorage.setItem('tarefas', JSON.stringify(tarefas));
+  }, [tarefas]);
+
+
+  function handleAdd(){
+    setTarefas([...tarefas, input])
+    setInput('');
+  }
+
   return (
     <div>
-      <h1>Bem Vindo!</h1>
-      <BemVindo nome="Renato" sobrenome="Cruz" />
-      <BemVindo nome="Fabianne" sobrenome="Pousada" />
-      <BemVindo nome="Isabella" sobrenome="Pereira" />
-      <h1>Curso React</h1>
+
+      <ul>
+        {tarefas.map(tarefa => (
+          <li key={tarefa}>{tarefa}</li>
+        ))}
+      </ul>
+
+      <input type="text" value={input} onChange={e => setInput(e.target.value)}/>    
+      <button type="button" onClick={handleAdd}>Adicionar</button>
+
     </div>
   );
 }
