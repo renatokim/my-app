@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './style.css';
 
-////https://sujeitoprogramador.com/rn-api/?api=posts
-
-
-
 function App() {
   const [nutri, setNutri] = useState([]);
 
@@ -19,7 +15,6 @@ function App() {
         console.log(json);
         setNutri(json);
       })
-
     }
 
     loadApi();
