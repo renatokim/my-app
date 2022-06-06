@@ -5,7 +5,6 @@ function App() {
   const [nutri, setNutri] = useState([]);
 
   useEffect(()=> {
-
     function loadApi(){
       let url = 'https://sujeitoprogramador.com/rn-api/?api=posts';
 
